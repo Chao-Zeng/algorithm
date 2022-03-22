@@ -36,7 +36,9 @@ int main()
 
     std::cout << "clean\n";
     test_list.clean();
-    print_list(test_list);    
+    print_list(test_list);
+
+    std::cout << "list is empty: " << (test_list.empty() ? "True" : "False") << std::endl;
 
     return 0;
 }

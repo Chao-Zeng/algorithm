@@ -95,7 +95,8 @@ public:
     }
 
     void clean() {
-        for (size_t i = 0; i < size_; ++i)
+        size_t count = size_;
+        for (size_t i = 0; i < count; ++i)
         {
             pop_back();            
         }        
