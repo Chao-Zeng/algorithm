@@ -13,8 +13,6 @@ public:
 protected:
     ref_count_base() = default;
     virtual ~ref_count_base() = default;
-    ref_count_base(const ref_count_base&) = delete;
-    ref_count_base& operator=(const ref_count_base&) = delete;
 
     void add_ref() {
         ++count_;
