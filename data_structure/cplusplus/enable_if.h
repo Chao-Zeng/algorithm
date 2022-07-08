@@ -58,3 +58,24 @@ private:
 };
 
 class C {};
+
+#define DEFINE_HAS_METHOD(method) \
+template<typename C, typename R, typename... Args> \
+struct has_##method \
+{ \
+private: \
+    template<typename U> \
+    static std::true_type check(int, typename std::enable_if_t< \
+                                                    std::is_same_v<R, decltype(std::declval<U>().method(std::declval<Args>()...))> \
+                                                > * = 0); \
+    template<typename U> \
+    static std::false_type check(...); \
+public: \
+    static constexpr bool value = std::is_same_v<std::true_type, decltype(check<C>(0))>; \
+}; \
+
+class D
+{
+public:
+    int Foo(int, const char*, const std::string&) {}
+};

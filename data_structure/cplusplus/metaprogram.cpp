@@ -8,6 +8,8 @@
 
 #define LOG(...) std::cout << #__VA_ARGS__ << " is " << __VA_ARGS__ << "\n"
 
+DEFINE_HAS_METHOD(Foo)
+
 void test_select()
 {
     LOG(std::is_same<select<0, int, float, char, double>::type, int>::value);
@@ -36,6 +38,33 @@ void test_enable_if()
     B<A> b;
     //error
     //B<C> b1;
+
+    if (has_Foo<D, int, int, const char*, const std::string&>::value)
+    {
+        std::cout << "D have method int Foo(int, const char*, const std::string&);\n";
+    }
+    else
+    {
+        std::cout << "D DON'T have method int Foo(int, const char*, const std::string&);\n";
+    }
+
+    if (has_Foo<D, void, int, const char*, const std::string&>::value)
+    {
+        std::cout << "D have method void Foo(int, const char*, const std::string&);\n";
+    }
+    else
+    {
+        std::cout << "D DON'T have method void Foo(int, const char*, const std::string&);\n";
+    }
+
+    if (has_Foo<D, int, int, const char*>::value)
+    {
+        std::cout << "D have method int Foo(int, const char*);\n";
+    }
+    else
+    {
+        std::cout << "D DON'T have method int Foo(int, const char*);\n";
+    }
 }
 
 int main()
